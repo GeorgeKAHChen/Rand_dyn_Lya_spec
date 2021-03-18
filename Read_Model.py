@@ -18,6 +18,8 @@ def Read_Model(MODEL_FILE):
     File = open(model_path, "r")
     FileLine = File.readline()
     information = FileLine
+    print("Model Information:")
+    print(information)
     FileLine = File.readline()
     initial_t, final_t, delta_t = Init.FileReadLine(FileLine, mode = "float")
     initial_val = []
@@ -31,9 +33,9 @@ def Read_Model(MODEL_FILE):
         if len(states) == 0:
             initial_val = deepcopy(array)
         if len(array) == len(initial_val):
-            states.append(array)
+            states.append(np.array(array))
         else:
-            array = np.reshape(np.matrix(array), (3, 3))
+            array = np.matrix(np.reshape(np.matrix(array), (3, 3)))
             Jacobian.append(array)
         FileLine = File.readline()
 

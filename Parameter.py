@@ -9,4 +9,5 @@
 MULTI_CORE = 4
 # For multi code calculation
 
-MODEL_FILE = ["./", "Lorenz20210318154541.model"]
+#MODEL_FILE = ["./", "model", "Lorenz20210318185138.model"]
+MODEL_FILE = ["./", "model", "Lorenz20210318185138.model"]
