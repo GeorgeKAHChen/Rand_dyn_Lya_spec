@@ -6,12 +6,18 @@
 #
 #==================================================
 
+#==================================================
+# Import your model file here
+from model import Lorenz as model
+#==================================================
+
+
 import multiprocessing
 import numpy as np
 
 import Init
 import Parameter 
-from model import Lorenz as model
+
 
 
 MULTI_CORE = Parameter.MULTI_CORE

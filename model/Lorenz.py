@@ -16,10 +16,10 @@ beta = 8.0 / 3.0
 
 
 #delta_t = 0.01
-delta_t = 0.1
-initial_val = [1.0, 1.0, 1.0]
+delta_t = 0.001
 initial_t = 0
 final_t = 1000
+initial_val = [1.0, 1.0, 1.0]
 model_name = "Lorenz"
 information = "Lorenz" + "(rho, sigma, beta) = ("  + str(rho) + ", " + str(sigma) + ", " + str(beta) + ")"
 
