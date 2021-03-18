@@ -4,13 +4,14 @@
 #
 #
 #=========================================
+import random
 import numpy as np
 a = 0.2
 b = 0.2
 c = 5.7
 
 
-delta_t = 0.1
+delta_t = 0.001
 initial_t = 0
 final_t = 1000
 initial_val = [1.0, 1.0, 1.0]

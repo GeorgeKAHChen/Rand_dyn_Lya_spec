@@ -5,7 +5,9 @@ You can put your model here, or use the original model to get data
 ### Structure of files
 To build a full model, you need
 
-`delta_t` parameter of delta time series (float)
+`delta_t` parameter of delta time series (int/float)
+
+* If the `delta_t` parameter is an `int`, then the system is a <b>map</b> rather than a system. The program will use the map calculator rather than the Runge-Kutta method.
 
 `initial_t` Initial time value of the system (int/float)
 
@@ -13,13 +15,12 @@ To build a full model, you need
 
 `initial_val` Initial value of the system(list)
 
-<br/><br/><br/>
+<br/><br/>
 `model_name` Model file name (str) 
 
 `information` Introduce of the model (str)
 
-<br/><br/><br/>
-`def f(state, t)` The function of system, return the `np.array` vector of values.
+<br/><br/> The function of system, return the `np.array` vector of values.
 
 `def Jf(state)` The function of Jacobian Matrix, return the `np.matrix` of the values.
 

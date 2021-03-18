@@ -35,7 +35,7 @@ def Read_Model(MODEL_FILE):
         if len(array) == len(initial_val):
             states.append(np.array(array))
         else:
-            array = np.matrix(np.reshape(np.matrix(array), (3, 3)))
+            array = np.matrix(np.reshape(np.matrix(array), (len(initial_val), len(initial_val))))
             Jacobian.append(array)
         FileLine = File.readline()
 

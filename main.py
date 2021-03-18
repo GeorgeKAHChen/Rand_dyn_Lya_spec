@@ -65,3 +65,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+#[TODO] STILL HAVE BUG IF DIMENSION = 1
