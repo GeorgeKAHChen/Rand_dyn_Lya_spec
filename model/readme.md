@@ -6,14 +6,21 @@ You can put your model here, or use the original model to get data
 To build a full model, you need
 
 `delta_t` parameter of delta time series (float)
+
 `initial_t` Initial time value of the system (int/float)
+
 `final_t` End time value of the system (int/float)
+
 `initial_val` Initial value of the system(list)
 
+<br/><br/><br/>
 `model_name` Model file name (str) 
+
 `information` Introduce of the model (str)
 
+<br/><br/><br/>
 `def f(state, t)` The function of system, return the `np.array` vector of values.
+
 `def Jf(state)` The function of Jacobian Matrix, return the `np.matrix` of the values.
 
 Also you can add other parameter of the system, but they will have no influence of the model calculation or Lyapunov spectrum calculation.
