@@ -17,7 +17,7 @@ def Read_Model(MODEL_FILE):
         model_path = os.path.join(model_path, MODEL_FILE[i])
     File = open(model_path, "r")
     FileLine = File.readline()
-    information = FileLine
+    information = FileLine[0: -1]
     print("Model Information:")
     print(information)
     FileLine = File.readline()
@@ -39,4 +39,4 @@ def Read_Model(MODEL_FILE):
             Jacobian.append(array)
         FileLine = File.readline()
 
-    return initial_val, initial_t,final_t, delta_t, states, Jacobian
+    return information, initial_val, initial_t, final_t, delta_t, states, Jacobian

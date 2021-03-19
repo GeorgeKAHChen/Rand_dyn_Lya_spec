@@ -19,7 +19,7 @@ COLOR_LOOP = ["r", "g", "b", "c", "m"]
 
 
 def main():
-    initial_val, initial_t, _, delta_t, _, Jacobian = Read_Model(Parameter.MODEL_FILE)
+    information, initial_val, initial_t, _, delta_t, _, Jacobian = Read_Model(Parameter.MODEL_FILE)
 
     output_vals = [[0 for n in range((len(initial_val)))]]
     orth_mat = np.eye(len(initial_val))
