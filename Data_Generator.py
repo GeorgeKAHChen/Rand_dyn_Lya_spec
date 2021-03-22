@@ -11,8 +11,9 @@
 
 #from model import Logistic as model
 #from model import Henon as model
-from model import Lorenz as model
+#from model import Lorenz as model
 #from model import Rossler as model
+from model import Ikeda as model
 #==================================================
 
 
@@ -113,7 +114,7 @@ def main(OutputFile = False, initial_val = [], old_information = "", Calc_Jaco =
         pool = multiprocessing.Pool(processes = MULTI_CORE)
         Jaco_set = pool.map(model.Jf, Val_set)
     
-    if Output:
+    if OutputFile:
         print("Model Output")
         tmp = []
         for i in range(0, len(Jaco_set)):
@@ -125,7 +126,7 @@ def main(OutputFile = False, initial_val = [], old_information = "", Calc_Jaco =
         File.write(String)
         File.close()
 
-    return initial_val, initial_t, final_t, delta_t, states, Jacobian
+    return information, initial_val, initial_t, final_t, delta_t, Val_set, Jaco_set
 
 
 
