@@ -43,11 +43,9 @@ def Jf(state):
     tau = C1 - C3 / (1 + x*x + y*y)
     var_sin = np.sin(tau)
     var_cos = np.cos(tau)
-    z1 = x*var_sin + y*var_cos
-    z2 = x*var_cos - y*var_sin
-    Px = 2 * C3 * x / ((1 + x*x + y*y) ** 2)
-    Py = 2 * C3 * y / ((1 + x*x + y*y) ** 2)
-    return np.matrix([[var_cos - Px*z1,  -var_sin - Py*z1], 
-                      [var_sin - Px*z2,   var_cos + Py*z2]])
+    para = - 2 * C2 * C3/( (1 + x*x + y*y) ** 2)
+    return para * np.matrix([[var_cos, -var_sin], 
+                             [var_sin,  var_cos]]) * np.matrix([[1 - x*y, -y * y  ], 
+                                                                [x * x  , 1 + x*y ]])
 
 
