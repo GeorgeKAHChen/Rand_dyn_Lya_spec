@@ -6,7 +6,9 @@
 #=========================================
 import random
 import numpy as np
-rho = 28.0
+#rho = 28.0
+#rho = 142.0
+rho = 148.0
 sigma = 10.0
 beta = 8.0 / 3.0
 

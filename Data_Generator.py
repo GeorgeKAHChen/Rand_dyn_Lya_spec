@@ -10,8 +10,8 @@
 # Import your model file here
 
 #from model import Logistic as model
-from model import Henon as model
-#from model import Lorenz as model
+#from model import Henon as model
+from model import Lorenz as model
 #from model import Rossler as model
 #from model import Ikeda as model
 #==================================================
