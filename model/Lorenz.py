@@ -8,13 +8,13 @@ import random
 import numpy as np
 #rho = 28.0
 #rho = 142.0
-rho = 148.0
-sigma = 10.0
-beta = 8.0 / 3.0
+#rho = 148.0
+#sigma = 10.0
+#beta = 8.0 / 3.0
 
-#rho = 45.92
-#sigma = 4
-#beta = 10
+rho = 45.92
+sigma = 4
+beta = 10
 
 
 #delta_t = 0.01
