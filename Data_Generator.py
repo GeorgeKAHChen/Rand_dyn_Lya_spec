@@ -11,7 +11,11 @@
 
 #from model import Logistic as model
 #from model import Henon as model
+<<<<<<< HEAD
 #from model import Lorenz as model
+=======
+from model import Lorenz as model
+>>>>>>> 8e13b14c5516d3810702351c4c700464fb452bdf
 #from model import Rossler as model
 from model import Ikeda as model
 #==================================================

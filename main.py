@@ -26,6 +26,7 @@ def main():
     else:
         information, initial_val, initial_t, _, delta_t, Val_Set, Jacobian = Data_Generator.main(OutputFile = False, initial_val =  [], old_information = "", Calc_Jaco = True)
 
+    information, initial_val, _, _, delta_t, Val_Set, Jacobian = Data_Generator.main(OutputFile = False, initial_val = Val_Set[len(Val_Set)-1], old_information = "", Calc_Jaco = True)
     output_vals = [[0 for n in range((len(initial_val)))]]
     final_mat_norm = np.eye(len(initial_val))
     curr_time = initial_t
@@ -43,7 +44,7 @@ def main():
             new_output = deepcopy(output_vals[len(output_vals) - 1])
             for i in range(0, len(new_output)):
                 norm = np.linalg.norm(final_mat[:, i])
-                new_output[i] = ((new_output[i] * (curr_time - initial_t)) + np.log(norm)) / (curr_time + delta_t - initial_t)
+                new_output[i] = ((new_output[i] * (curr_time - time_series[0])) + np.log(norm)) / (curr_time + delta_t - time_series[0])
             curr_time += delta_t
             time_series.append(curr_time)
             output_vals.append(new_output)
