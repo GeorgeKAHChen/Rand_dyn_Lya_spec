@@ -31,6 +31,7 @@ def main():
     curr_time = initial_t
     time_series = [initial_t]
     for ttl in range(0, Parameter.GENERATOR_LOOP):
+        print("Lyapunov spectrum")
         print(ttl, Parameter.GENERATOR_LOOP)
         for kase in range(0, len(Jacobian) - 1):
             if ttl != 0 and kase == 0:

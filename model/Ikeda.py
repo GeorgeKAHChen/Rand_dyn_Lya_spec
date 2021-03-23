@@ -33,19 +33,23 @@ def f(state, t):
     #print(tau)
     var_sin = np.sin(tau)
     var_cos = np.cos(tau)
-    return np.array([R+C2*(x*var_cos-y*var_sin), 
-                       C2*(x*var_sin+y*var_cos)])
+    return np.array([R+C2 * (x * var_cos - y * var_sin), 
+                       C2 * (x * var_sin + y * var_cos)])
 
 
 def Jf(state):
     x = state[0]
     y = state[1]
-    tau = C1 - C3 / (1 + x*x + y*y)
+
+    xi = 1 / (1 + x*x + y*y)
+    alpha = 2 * C3 * xi * xi
+
+    tau = C1 - C3 * xi
     var_sin = np.sin(tau)
     var_cos = np.cos(tau)
-    para = - 2 * C2 * C3/( (1 + x*x + y*y) ** 2)
-    return para * np.matrix([[var_cos, -var_sin], 
-                             [var_sin,  var_cos]]) * np.matrix([[1 - x*y, -y * y  ], 
-                                                                [x * x  , 1 + x*y ]])
 
+    para = C2 * np.matrix([[var_cos, -var_sin], 
+                             [var_sin,  var_cos]]) 
+    para = para * (np.eye(2) + np.matrix([[-y], [x]]) * np.matrix([2 * C3 * x * xi * xi, 2 * C3 * y * xi * xi]))
+    return np.matrix(para)
 
