@@ -16,8 +16,9 @@ C3 = 6
 delta_t = 1
 initial_t = 0
 #final_t = 1000000
-final_t = 10000
-#initial_val = [random.random()/10, random.random()/10]
+#final_t = 1e7
+final_t = 1e5
+#initial_val = [random.random()*10, random.random()*10]
 initial_val = [0.1, 0.1]
 
 model_name = "Ikeda"
@@ -29,6 +30,7 @@ def f(state, t):
     x = state[0]
     y = state[1]
     tau = C1 - C3 / (1 + x*x + y*y)
+    #print(tau)
     var_sin = np.sin(tau)
     var_cos = np.cos(tau)
     return np.array([R+C2*(x*var_cos-y*var_sin), 

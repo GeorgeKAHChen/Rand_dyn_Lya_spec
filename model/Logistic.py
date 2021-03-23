@@ -10,7 +10,7 @@ a = 3.90
 
 delta_t = 1
 initial_t = 0
-final_t = 1000000
+final_t = 1e5
 initial_val = [random.random()]
 model_name = "Logistic"
 information = "Logistic" + "(a) = ("  + str(a) + ")"

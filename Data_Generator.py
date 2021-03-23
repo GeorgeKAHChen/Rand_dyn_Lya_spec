@@ -10,10 +10,10 @@
 # Import your model file here
 
 #from model import Logistic as model
-#from model import Henon as model
+from model import Henon as model
 #from model import Lorenz as model
 #from model import Rossler as model
-from model import Ikeda as model
+#from model import Ikeda as model
 #==================================================
 
 
@@ -35,6 +35,8 @@ def Runge_Kutta(func, x0, t0, tn, delta_t):
     while 1:
         if curr_t > tn:
             break
+        if int(curr_t /delta_t) % 10000 == 0:
+            print(curr_t, tn, end = "\r")
         curr_x = Val_set[len(Val_set) - 1]
         k1 = np.array(eval(func)(curr_x, curr_t))
         k2 = np.array(eval(func)(curr_x + delta_t * k1 * 0.5, curr_t + delta_t * 0.5))
@@ -43,7 +45,7 @@ def Runge_Kutta(func, x0, t0, tn, delta_t):
         curr_x = curr_x + delta_t * (k1 + 2 * k2 + 2 * k3 + k4) * (1/6)
         Val_set.append(curr_x)
         curr_t += delta_t
-
+    print()
     return np.array(Val_set)
 
 
@@ -53,16 +55,26 @@ def map_calculator(func, x0, t0, tn, delta_t):
     while 1:
         if curr_t > tn:
             break
+        if int(curr_t /delta_t) % 10000 == 0:
+            print(curr_t, tn, end = "\r")
         Val_set.append(np.array(eval(func)(Val_set[len(Val_set) - 1], curr_t)))
         curr_t += delta_t
-
+    print()
     return np.array(Val_set)
+
+
+def write_str(File, string):
+    File.write(string)
+    return ""
 
 
 
 def main(OutputFile = False, initial_val = [], old_information = "", Calc_Jaco = True):
     map_model = False
-
+    File = 0
+    if OutputFile:
+        FileName = os.path.join("Output", model.model_name + str(Init.GetTime()) + ".model")
+        File = open(FileName, "a")
     if len(initial_val) == 0:
         initial_val = model.initial_val
     initial_t = model.initial_t
@@ -103,17 +115,21 @@ def main(OutputFile = False, initial_val = [], old_information = "", Calc_Jaco =
         Val_set = Val_set.tolist()
         if OutputFile:
             String += Init.ArrOutput(Val_set, Mode = 0, Save_File = False)
+            String = write_str(File, String)
     else:
         Val_set = map_calculator("model.f", initial_val, initial_t, final_t, delta_t)
         Val_set = Val_set.tolist()
         if OutputFile:
             String += Init.ArrOutput(Val_set, Mode = 0, Save_File = False)
+            String = write_str(File, String)
     Jaco_set = []
     if Calc_Jaco:
         print("Jacobian generate") 
         pool = multiprocessing.Pool(processes = MULTI_CORE)
         Jaco_set = pool.map(model.Jf, Val_set)
-    
+        if OutputFile:
+            String = write_str(File, String)
+
     if OutputFile:
         print("Model Output")
         tmp = []
@@ -121,9 +137,7 @@ def main(OutputFile = False, initial_val = [], old_information = "", Calc_Jaco =
             tmp.append(np.resize(Jaco_set[i], (len(initial_val) * len(initial_val))).tolist())
         String += Init.ArrOutput(tmp, Mode = 0, Save_File = False)
         
-        FileName = os.path.join("Output", model.model_name + str(Init.GetTime()) + ".model")
-        File = open(FileName, "a")
-        File.write(String)
+        String = write_str(File, String)
         File.close()
 
     return information, initial_val, initial_t, final_t, delta_t, Val_set, Jaco_set

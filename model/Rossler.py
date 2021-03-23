@@ -13,7 +13,7 @@ c = 5.7
 
 delta_t = 0.001
 initial_t = 0
-final_t = 1000
+final_t = 100
 initial_val = [1.0, 1.0, 1.0]
 model_name = "Rossler"
 information = "Rossler" + "(a, b, c) = ("  + str(a) + ", " + str(b) + ", " + str(c) + ")"

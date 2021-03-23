@@ -14,30 +14,45 @@ import matplotlib.pyplot as plt
 import Init
 from Gram_Schmidt import Gram_Schmidt
 from Read_Model import Read_Model
+import Data_Generator
+
 import Parameter
 COLOR_LOOP = ["r", "g", "b", "c", "m"]
 
 
 def main():
-    information, initial_val, initial_t, _, delta_t, _, Jacobian = Read_Model(Parameter.MODEL_FILE)
+    if Parameter.LYAPUNOV_READ_FILE:
+        information, initial_val, initial_t, _, delta_t, Val_Set, Jacobian = Read_Model(Parameter.MODEL_FILE)
+    else:
+        information, initial_val, initial_t, _, delta_t, Val_Set, Jacobian = Data_Generator.main(OutputFile = False, initial_val =  [], old_information = "", Calc_Jaco = True)
 
     output_vals = [[0 for n in range((len(initial_val)))]]
     final_mat_norm = np.eye(len(initial_val))
     curr_time = initial_t
     time_series = [initial_t]
-    for kase in range(0, len(Jacobian) - 1):
-        if kase % 1000 == 0:
-            print(kase, len(Jacobian) - 2, end = "\r")
-        final_mat_norm = Jacobian[kase] * np.matrix(final_mat_norm)
-        final_mat, final_mat_norm = Gram_Schmidt(final_mat_norm)
-        new_output = deepcopy(output_vals[len(output_vals) - 1])
-        for i in range(0, len(new_output)):
-            norm = np.linalg.norm(final_mat[:, i])
-            new_output[i] = ((new_output[i] * (curr_time - initial_t)) + np.log(norm)) / (curr_time + delta_t - initial_t)
-        curr_time += delta_t
-        time_series.append(curr_time)
-        output_vals.append(new_output)
-    print()
+    for ttl in range(0, Parameter.GENERATOR_LOOP):
+        print(ttl, Parameter.GENERATOR_LOOP)
+        for kase in range(0, len(Jacobian) - 1):
+            if ttl != 0 and kase == 0:
+                continue
+            if kase % 1000 == 0:
+                print(kase, len(Jacobian) - 2, end = "\r")
+            final_mat_norm = Jacobian[kase] * np.matrix(final_mat_norm)
+            final_mat, final_mat_norm = Gram_Schmidt(final_mat_norm)
+            new_output = deepcopy(output_vals[len(output_vals) - 1])
+            for i in range(0, len(new_output)):
+                norm = np.linalg.norm(final_mat[:, i])
+                new_output[i] = ((new_output[i] * (curr_time - initial_t)) + np.log(norm)) / (curr_time + delta_t - initial_t)
+            curr_time += delta_t
+            time_series.append(curr_time)
+            output_vals.append(new_output)
+        
+        print(output_vals[len(output_vals) - 1])
+        
+        if ttl + 1 != Parameter.GENERATOR_LOOP:
+            information, _, _, _, _, Val_Set, Jacobian = Data_Generator.main(OutputFile = False, initial_val = Val_Set[len(Val_Set)-1], old_information = information, Calc_Jaco = True)
+        
+        print()
     
     fig = plt.gcf()
     fig.set_size_inches(25, 3)
