@@ -13,7 +13,7 @@ MULTI_CORE = 4
 #MODEL_FILE = ["./", "Output", "Lorenz20210319034625.model"]
 #MODEL_FILE = ["./", "Output", "Rossler20210319034729.model"]
 #MODEL_FILE = ["./", "Output", "Henon20210319035439.model"]
-MODEL_FILE = ["./", "model", "Lorenz20210318225749.model"]
+#MODEL_FILE = ["./", "model", "Lorenz20210318225749.model"]
 MODEL_FILE = ["./", "Output", "Ikeda20210322145714.model"]
 
 EPSILON = 1/3

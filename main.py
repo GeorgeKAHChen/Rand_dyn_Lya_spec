@@ -22,17 +22,17 @@ def main():
     information, initial_val, initial_t, _, delta_t, _, Jacobian = Read_Model(Parameter.MODEL_FILE)
 
     output_vals = [[0 for n in range((len(initial_val)))]]
-    orth_mat = np.eye(len(initial_val))
+    final_mat_norm = np.eye(len(initial_val))
     curr_time = initial_t
     time_series = [initial_t]
     for kase in range(0, len(Jacobian) - 1):
         if kase % 1000 == 0:
             print(kase, len(Jacobian) - 2, end = "\r")
-        tmp = Jacobian[kase] * np.matrix(orth_mat)
-        _, orth_mat = Gram_Schmidt(tmp)
+        final_mat_norm = Jacobian[kase] * np.matrix(final_mat_norm)
+        final_mat, final_mat_norm = Gram_Schmidt(final_mat_norm)
         new_output = deepcopy(output_vals[len(output_vals) - 1])
         for i in range(0, len(new_output)):
-            norm = np.linalg.norm(tmp[:, i])
+            norm = np.linalg.norm(final_mat[:, i])
             new_output[i] = ((new_output[i] * (curr_time - initial_t)) + np.log(norm)) / (curr_time + delta_t - initial_t)
         curr_time += delta_t
         time_series.append(curr_time)
