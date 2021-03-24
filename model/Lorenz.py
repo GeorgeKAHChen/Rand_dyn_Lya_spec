@@ -6,21 +6,21 @@
 #=========================================
 import random
 import numpy as np
-#rho = 28.0
+rho = 28.0
 #rho = 142.0
 #rho = 148.0
-#sigma = 10.0
-#beta = 8.0 / 3.0
+sigma = 10.0
+beta = 8.0 / 3.0
 
-rho = 45.92
-sigma = 4
-beta = 10
+#rho = 45.92
+#sigma = 4
+#beta = 10
 
 
 #delta_t = 0.01
-delta_t = 0.001
+delta_t = 0.0001
 initial_t = 0
-final_t = 100
+final_t = 10
 initial_val = [1.0, 1.0, 1.0]
 model_name = "Lorenz"
 information = "Lorenz" + "(rho, sigma, beta) = ("  + str(rho) + ", " + str(sigma) + ", " + str(beta) + ")"

@@ -13,8 +13,8 @@
 #from model import Henon as model
 #from model import Lorenz as model
 #from model import Lorenz as model
-#from model import Rossler as model
-from model import Ikeda as model
+from model import Rossler as model
+#from model import Ikeda as model
 #==================================================
 
 
@@ -29,6 +29,8 @@ import Parameter
 
 
 MULTI_CORE = Parameter.MULTI_CORE
+
+
 
 def Runge_Kutta(func, x0, t0, tn, delta_t):
     Val_set = [x0]
@@ -128,6 +130,8 @@ def main(OutputFile = False, initial_val = [], old_information = "", Calc_Jaco =
         print("Jacobian generate") 
         pool = multiprocessing.Pool(processes = MULTI_CORE)
         Jaco_set = pool.map(model.Jf, Val_set)
+        pool.close()
+        pool.join()
         if OutputFile:
             String = write_str(File, String)
 

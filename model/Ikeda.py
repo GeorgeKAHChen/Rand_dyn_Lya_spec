@@ -17,7 +17,7 @@ delta_t = 1
 initial_t = 0
 #final_t = 1000000
 #final_t = 1e7
-final_t = 1e5
+final_t = 1e4
 #initial_val = [random.random()*10, random.random()*10]
 initial_val = [0.1, 0.1]
 

@@ -13,6 +13,7 @@ elif Init.SystemJudge() == "Darwin":
     MULTI_CORE = 4
 else:
     MULTI_CORE = MULTI_CORE
+
 # For multi code calculation
 #MODEL_FILE = ["./", "Output", "Logistic20210319034455.model"]
 #MODEL_FILE = ["./", "Output", "Henon20210319034530.model"]
